@@ -65,6 +65,7 @@ add_service_files(
 add_action_files(
   FILES
   Fibonacci.action
+  Averaging.action
 )
 
 ## Generate added messages and services with any dependencies listed here
@@ -175,6 +176,10 @@ add_executable(fibonacci_client src/fibonacci_client.cpp)
 target_link_libraries(fibonacci_client ${catkin_LIBRARIES})
 add_dependencies(fibonacci_client ${ros_beginner_tutorials_EXPORTED_TARGETS})
 
+add_executable(averaging_server src/averaging_server.cpp)
+target_link_libraries(averaging_server ${catkin_LIBRARIES})
+add_dependencies(averaging_server ${ros_beginner_tutorials_EXPORTED_TARGETS})
+
 #############
 ## Install ##
 #############
@@ -213,6 +218,7 @@ install(TARGETS
   add_two_ints_client
   fibonacci_server
   fibonacci_client
+  averaging_server
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
