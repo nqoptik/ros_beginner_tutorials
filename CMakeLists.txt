@@ -195,6 +195,7 @@ install(PROGRAMS
   scripts/add_two_ints_server.py
   scripts/add_two_ints_client.py
   scripts/fibonacci_server.py
+  scripts/fibonacci_client.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
