@@ -196,6 +196,9 @@ add_dependencies(fibonacci_class_client ${ros_beginner_tutorials_EXPORTED_TARGET
 add_executable(basic_shapes src/basic_shapes.cpp)
 target_link_libraries(basic_shapes ${catkin_LIBRARIES})
 
+add_executable(points_and_lines src/points_and_lines.cpp)
+target_link_libraries(points_and_lines ${catkin_LIBRARIES})
+
 #############
 ## Install ##
 #############
@@ -240,6 +243,7 @@ install(TARGETS
   fibonacci_callback_client
   fibonacci_class_client
   basic_shapes
+  points_and_lines
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
