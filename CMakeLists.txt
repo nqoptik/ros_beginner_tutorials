@@ -184,6 +184,14 @@ add_executable(averaging_client src/averaging_client.cpp)
 target_link_libraries(averaging_client ${catkin_LIBRARIES})
 add_dependencies(averaging_client ${ros_beginner_tutorials_EXPORTED_TARGETS})
 
+add_executable(fibonacci_callback_client src/fibonacci_callback_client.cpp)
+target_link_libraries(fibonacci_callback_client ${catkin_LIBRARIES})
+add_dependencies(fibonacci_callback_client ${ros_beginner_tutorials_EXPORTED_TARGETS})
+
+add_executable(fibonacci_class_client src/fibonacci_class_client.cpp)
+target_link_libraries(fibonacci_class_client ${catkin_LIBRARIES})
+add_dependencies(fibonacci_class_client ${ros_beginner_tutorials_EXPORTED_TARGETS})
+
 #############
 ## Install ##
 #############
@@ -225,6 +233,8 @@ install(TARGETS
   fibonacci_client
   averaging_server
   averaging_client
+  fibonacci_callback_client
+  fibonacci_class_client
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
