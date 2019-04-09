@@ -10,6 +10,7 @@ project(ros_beginner_tutorials)
 find_package(catkin REQUIRED COMPONENTS
   actionlib
   actionlib_msgs
+  visualization_msgs
   roscpp
   rospy
   std_msgs
@@ -107,7 +108,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES ros_beginner_tutorials
-  CATKIN_DEPENDS roscpp rospy std_msgs message_runtime actionlib_msgs
+  CATKIN_DEPENDS roscpp rospy std_msgs actionlib_msgs visualization_msgs message_runtime
 #  DEPENDS system_lib
 )
 
@@ -192,6 +193,9 @@ add_executable(fibonacci_class_client src/fibonacci_class_client.cpp)
 target_link_libraries(fibonacci_class_client ${catkin_LIBRARIES})
 add_dependencies(fibonacci_class_client ${ros_beginner_tutorials_EXPORTED_TARGETS})
 
+add_executable(basic_shapes src/basic_shapes.cpp)
+target_link_libraries(basic_shapes ${catkin_LIBRARIES})
+
 #############
 ## Install ##
 #############
@@ -235,6 +239,7 @@ install(TARGETS
   averaging_client
   fibonacci_callback_client
   fibonacci_class_client
+  basic_shapes
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
