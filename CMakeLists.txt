@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   actionlib
   actionlib_msgs
   interactive_markers
+  tf
   visualization_msgs
   roscpp
   rospy
@@ -109,7 +110,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES ros_beginner_tutorials
-  CATKIN_DEPENDS roscpp rospy std_msgs actionlib_msgs interactive_markers visualization_msgs message_runtime
+  CATKIN_DEPENDS roscpp rospy std_msgs actionlib_msgs interactive_markers tf visualization_msgs message_runtime
 #  DEPENDS system_lib
 )
 
@@ -203,6 +204,9 @@ target_link_libraries(points_and_lines ${catkin_LIBRARIES})
 add_executable(simple_marker src/simple_marker.cpp)
 target_link_libraries(simple_marker ${catkin_LIBRARIES})
 
+add_executable(basic_controls src/basic_controls.cpp)
+target_link_libraries(basic_controls ${catkin_LIBRARIES})
+
 #############
 ## Install ##
 #############
@@ -249,6 +253,7 @@ install(TARGETS
   basic_shapes
   points_and_lines
   simple_marker
+  basic_controls
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
