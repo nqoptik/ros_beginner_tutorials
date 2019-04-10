@@ -10,6 +10,7 @@ project(ros_beginner_tutorials)
 find_package(catkin REQUIRED COMPONENTS
   actionlib
   actionlib_msgs
+  interactive_markers
   visualization_msgs
   roscpp
   rospy
@@ -108,7 +109,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES ros_beginner_tutorials
-  CATKIN_DEPENDS roscpp rospy std_msgs actionlib_msgs visualization_msgs message_runtime
+  CATKIN_DEPENDS roscpp rospy std_msgs actionlib_msgs interactive_markers visualization_msgs message_runtime
 #  DEPENDS system_lib
 )
 
@@ -199,6 +200,9 @@ target_link_libraries(basic_shapes ${catkin_LIBRARIES})
 add_executable(points_and_lines src/points_and_lines.cpp)
 target_link_libraries(points_and_lines ${catkin_LIBRARIES})
 
+add_executable(simple_marker src/simple_marker.cpp)
+target_link_libraries(simple_marker ${catkin_LIBRARIES})
+
 #############
 ## Install ##
 #############
@@ -244,6 +248,7 @@ install(TARGETS
   fibonacci_class_client
   basic_shapes
   points_and_lines
+  simple_marker
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
