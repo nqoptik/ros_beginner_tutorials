@@ -1,0 +1,107 @@
+name: ros-beginner-tutorials
+version: '0.2.0'
+summary: ROS Example
+description: |
+  The ROS beginner tutorials packaged as a snap.
+
+grade: stable
+confinement: strict
+
+parts:
+  workspace:
+    plugin: catkin
+    rosdistro: kinetic
+    catkin-packages: [ros_beginner_tutorials]
+
+apps:
+  roscore:
+    command: roscore
+    plugs: [network, network-bind]
+
+  talker:
+    command: rosrun ros_beginner_tutorials talker
+    plugs: [network, network-bind]
+
+  talkerpy:
+    command: rosrun ros_beginner_tutorials talker.py
+    plugs: [network, network-bind]
+
+  listener:
+    command: rosrun ros_beginner_tutorials listener
+    plugs: [network, network-bind]
+
+  listenerpy:
+    command: rosrun ros_beginner_tutorials listener.py
+    plugs: [network, network-bind]
+
+  talkandlisten:
+    command: roslaunch ros_beginner_tutorials talk_and_listen.launch
+    plugs: [network, network-bind]
+
+  addtwointsserver:
+    command: rosrun ros_beginner_tutorials add_two_ints_server
+    plugs: [network, network-bind]
+
+  addtwointsserverpy:
+    command: rosrun ros_beginner_tutorials add_two_ints_server.py
+    plugs: [network, network-bind]
+
+  addtwointsclient:
+    command: rosrun ros_beginner_tutorials add_two_ints_client
+    plugs: [network, network-bind]
+
+  addtwointsclientpy:
+    command: rosrun ros_beginner_tutorials add_two_ints_client.py
+    plugs: [network, network-bind]
+
+  fibonacciserver:
+    command: rosrun ros_beginner_tutorials fibonacci_server
+    plugs: [network, network-bind]
+
+  fibonacciserverpy:
+    command: rosrun ros_beginner_tutorials fibonacci_server.py
+    plugs: [network, network-bind]
+
+  fibonacciclient:
+    command: rosrun ros_beginner_tutorials fibonacci_client
+    plugs: [network, network-bind]
+
+  fibonacciclientpy:
+    command: rosrun ros_beginner_tutorials fibonacci_client.py
+    plugs: [network, network-bind]
+
+  averagingserver:
+    command: rosrun ros_beginner_tutorials averaging_server
+    plugs: [network, network-bind]
+
+  averagingclient:
+    command: rosrun ros_beginner_tutorials averaging_client
+    plugs: [network, network-bind]
+
+  gennumberspy:
+    command: rosrun ros_beginner_tutorials gen_numbers.py
+    plugs: [network, network-bind]
+
+  fibonaccicallbackclient:
+    command: rosrun ros_beginner_tutorials fibonacci_callback_client
+    plugs: [network, network-bind]
+
+  fibonacciclassclient:
+    command: rosrun ros_beginner_tutorials fibonacci_class_client
+    plugs: [network, network-bind]
+
+  basicshapes:
+    command: rosrun ros_beginner_tutorials basic_shapes
+    plugs: [network, network-bind]
+
+  pointsandlines:
+    command: rosrun ros_beginner_tutorials points_and_lines
+    plugs: [network, network-bind]
+
+  simplemarker:
+    command: rosrun ros_beginner_tutorials simple_marker
+    plugs: [network, network-bind]
+
+  basiccontrols:
+    command: rosrun ros_beginner_tutorials basic_controls
+    plugs: [network, network-bind]
