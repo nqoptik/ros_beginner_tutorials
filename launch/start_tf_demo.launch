@@ -9,4 +9,6 @@
 
     <node pkg="ros_beginner_tutorials" type="turtle_tf_broadcaster" args="/turtle1" name="turtle1_tf_broadcaster" />
     <node pkg="ros_beginner_tutorials" type="turtle_tf_broadcaster" args="/turtle2" name="turtle2_tf_broadcaster" />
+
+    <node pkg="ros_beginner_tutorials" type="turtle_tf_listener" name="listener" />
 </launch>
