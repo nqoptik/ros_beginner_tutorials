@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   actionlib_msgs
   interactive_markers
   tf
+  turtlesim
   visualization_msgs
   roscpp
   rospy
@@ -110,7 +111,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES ros_beginner_tutorials
-  CATKIN_DEPENDS roscpp rospy std_msgs actionlib_msgs interactive_markers tf visualization_msgs message_runtime
+  CATKIN_DEPENDS roscpp rospy std_msgs actionlib_msgs interactive_markers tf turtlesim visualization_msgs message_runtime
 #  DEPENDS system_lib
 )
 
@@ -207,6 +208,9 @@ target_link_libraries(simple_marker ${catkin_LIBRARIES})
 add_executable(basic_controls src/basic_controls.cpp)
 target_link_libraries(basic_controls ${catkin_LIBRARIES})
 
+add_executable(turtle_tf_broadcaster src/turtle_tf_broadcaster.cpp)
+target_link_libraries(turtle_tf_broadcaster ${catkin_LIBRARIES})
+
 #############
 ## Install ##
 #############
@@ -254,6 +258,7 @@ install(TARGETS
   points_and_lines
   simple_marker
   basic_controls
+  turtle_tf_broadcaster
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
@@ -273,6 +278,8 @@ install(TARGETS
 
 install(FILES
   launch/talk_and_listen.launch
+  launch/start_tf_demo.launch
+  launch/turtlemimic.launch
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
