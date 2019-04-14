@@ -239,6 +239,7 @@ install(PROGRAMS
   scripts/fibonacci_server.py
   scripts/fibonacci_client.py
   scripts/gen_numbers.py
+  scripts/turtle_tf_broadcaster.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
