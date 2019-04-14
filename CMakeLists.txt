@@ -240,6 +240,7 @@ install(PROGRAMS
   scripts/fibonacci_client.py
   scripts/gen_numbers.py
   scripts/turtle_tf_broadcaster.py
+  scripts/turtle_tf_listener.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

@@ -10,4 +10,6 @@
     <node name="turtle2_tf_broadcaster" pkg="ros_beginner_tutorials" type="turtle_tf_broadcaster.py" respawn="false" output="screen">
         <param name="turtle" type="string" value="turtle2" />
     </node>
+
+    <node pkg="ros_beginner_tutorials" type="turtle_tf_listener.py" name="listener" />
 </launch>
