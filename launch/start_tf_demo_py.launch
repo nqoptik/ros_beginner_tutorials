@@ -12,4 +12,6 @@
     </node>
 
     <node pkg="ros_beginner_tutorials" type="turtle_tf_listener.py" name="listener" />
+    <node pkg="ros_beginner_tutorials" type="fixed_tf_broadcaster.py" name="broadcaster_fixed" />
+    <!-- <node pkg="ros_beginner_tutorials" type="dynamic_tf_broadcaster.py" name="broadcaster_dynamic" /> -->
 </launch>

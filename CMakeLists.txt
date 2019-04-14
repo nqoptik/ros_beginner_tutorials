@@ -241,6 +241,8 @@ install(PROGRAMS
   scripts/gen_numbers.py
   scripts/turtle_tf_broadcaster.py
   scripts/turtle_tf_listener.py
+  scripts/fixed_tf_broadcaster.py
+  scripts/dynamic_tf_broadcaster.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
