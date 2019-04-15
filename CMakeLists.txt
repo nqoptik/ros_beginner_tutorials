@@ -220,6 +220,9 @@ target_link_libraries(frame_tf_broadcaster ${catkin_LIBRARIES})
 add_executable(turtle_tf_listener_debug src/turtle_tf_listener_debug.cpp)
 target_link_libraries(turtle_tf_listener_debug ${catkin_LIBRARIES})
 
+add_executable(turtle_tf_message_filter src/turtle_tf_message_filter.cpp)
+target_link_libraries(turtle_tf_message_filter ${catkin_LIBRARIES})
+
 #############
 ## Install ##
 #############
@@ -246,6 +249,7 @@ install(PROGRAMS
   scripts/turtle_tf_listener.py
   scripts/fixed_tf_broadcaster.py
   scripts/dynamic_tf_broadcaster.py
+  scripts/turtle_tf_message_broadcaster.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
@@ -275,6 +279,7 @@ install(TARGETS
   turtle_tf_listener
   frame_tf_broadcaster
   turtle_tf_listener_debug
+  turtle_tf_message_filter
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
@@ -298,6 +303,7 @@ install(FILES
   launch/start_tf_demo_py.launch
   launch/turtlemimic.launch
   launch/start_debug_demo.launch
+  launch/turtle_tf_sensor.launch
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
