@@ -217,6 +217,9 @@ target_link_libraries(turtle_tf_listener ${catkin_LIBRARIES})
 add_executable(frame_tf_broadcaster src/frame_tf_broadcaster.cpp)
 target_link_libraries(frame_tf_broadcaster ${catkin_LIBRARIES})
 
+add_executable(turtle_tf_listener_debug src/turtle_tf_listener_debug.cpp)
+target_link_libraries(turtle_tf_listener_debug ${catkin_LIBRARIES})
+
 #############
 ## Install ##
 #############
@@ -271,6 +274,7 @@ install(TARGETS
   turtle_tf_broadcaster
   turtle_tf_listener
   frame_tf_broadcaster
+  turtle_tf_listener_debug
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
@@ -291,7 +295,9 @@ install(TARGETS
 install(FILES
   launch/talk_and_listen.launch
   launch/start_tf_demo.launch
+  launch/start_tf_demo_py.launch
   launch/turtlemimic.launch
+  launch/start_debug_demo.launch
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
