@@ -1,5 +1,5 @@
 name: ros-beginner-tutorials
-version: '0.2.0'
+version: '0.3.0'
 summary: ROS Example
 description: |
   The ROS beginner tutorials packaged as a snap.
@@ -104,4 +104,52 @@ apps:
 
   basiccontrols:
     command: rosrun ros_beginner_tutorials basic_controls
+    plugs: [network, network-bind]
+
+  turtletfbroadcaster:
+    command: rosrun ros_beginner_tutorials turtle_tf_broadcaster
+    plugs: [network, network-bind]
+
+  turtletfbroadcasterpy:
+    command: rosrun ros_beginner_tutorials turtle_tf_broadcaster.py
+    plugs: [network, network-bind]
+
+  turtletflistener:
+    command: rosrun ros_beginner_tutorials turtle_tf_listener
+    plugs: [network, network-bind]
+
+  turtletflistenerpy:
+    command: rosrun ros_beginner_tutorials turtle_tf_listener.py
+    plugs: [network, network-bind]
+
+  frametfbroadcaster:
+    command: rosrun ros_beginner_tutorials frame_tf_broadcaster
+    plugs: [network, network-bind]
+
+  fixedtfbroadcasterpy:
+    command: rosrun ros_beginner_tutorials fixed_tf_broadcaster.py
+    plugs: [network, network-bind]
+
+  dynamictfbroadcasterpy:
+    command: rosrun ros_beginner_tutorials dynamic_tf_broadcaster.py
+    plugs: [network, network-bind]
+
+  turtletflistenerdebug:
+    command: rosrun ros_beginner_tutorials turtle_tf_listener_debug
+    plugs: [network, network-bind]
+
+  turtletfmessagefilter:
+    command: rosrun ros_beginner_tutorials turtle_tf_message_filter
+    plugs: [network, network-bind]
+
+  turtletfmessagebroadcaster:
+    command: rosrun ros_beginner_tutorials turtle_tf_message_broadcaster.py
+    plugs: [network, network-bind]
+
+  tfbroadcaster:
+    command: rosrun ros_beginner_tutorials tf_broadcaster
+    plugs: [network, network-bind]
+
+  tflistener:
+    command: rosrun ros_beginner_tutorials tf_listener
     plugs: [network, network-bind]
