@@ -14,6 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
   tf
   turtlesim
   geometry_msgs
+  sensor_msgs
   visualization_msgs
   roscpp
   rospy
@@ -76,8 +77,10 @@ add_action_files(
 ## Generate added messages and services with any dependencies listed here
 generate_messages(
   DEPENDENCIES
-  std_msgs
   actionlib_msgs
+  geometry_msgs
+  sensor_msgs
+  std_msgs
 )
 
 ################################################
@@ -112,7 +115,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES ros_beginner_tutorials
-  CATKIN_DEPENDS roscpp rospy std_msgs actionlib_msgs interactive_markers tf turtlesim geometry_msgs visualization_msgs message_runtime
+  CATKIN_DEPENDS roscpp rospy std_msgs actionlib_msgs interactive_markers tf turtlesim geometry_msgs sensor_msgs visualization_msgs message_runtime
 #  DEPENDS system_lib
 )
 
@@ -229,6 +232,9 @@ target_link_libraries(tf_broadcaster ${catkin_LIBRARIES})
 
 add_executable(tf_listener src/tf_listener.cpp)
 target_link_libraries(tf_listener ${catkin_LIBRARIES})
+
+add_executable(state_publisher src/state_publisher.cpp)
+target_link_libraries(state_publisher ${catkin_LIBRARIES})
 
 #############
 ## Install ##
