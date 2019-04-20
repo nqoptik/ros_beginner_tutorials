@@ -13,6 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
   interactive_markers
   tf
   turtlesim
+  urdf
   geometry_msgs
   sensor_msgs
   visualization_msgs
@@ -115,7 +116,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES ros_beginner_tutorials
-  CATKIN_DEPENDS roscpp rospy std_msgs actionlib_msgs interactive_markers tf turtlesim geometry_msgs sensor_msgs visualization_msgs message_runtime
+  CATKIN_DEPENDS roscpp rospy std_msgs actionlib_msgs interactive_markers tf turtlesim urdf geometry_msgs sensor_msgs visualization_msgs message_runtime
 #  DEPENDS system_lib
 )
 
@@ -236,6 +237,9 @@ target_link_libraries(tf_listener ${catkin_LIBRARIES})
 add_executable(state_publisher src/state_publisher.cpp)
 target_link_libraries(state_publisher ${catkin_LIBRARIES})
 
+add_executable(parser src/parser.cpp)
+ target_link_libraries(parser ${catkin_LIBRARIES})
+
 #############
 ## Install ##
 #############
@@ -295,6 +299,7 @@ install(TARGETS
   turtle_tf_message_filter
   tf_broadcaster
   tf_listener
+  parser
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
@@ -319,6 +324,8 @@ install(FILES
   launch/turtlemimic.launch
   launch/start_debug_demo.launch
   launch/turtle_tf_sensor.launch
+  launch/display.launch
+  launch/urdf_display.launch
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
