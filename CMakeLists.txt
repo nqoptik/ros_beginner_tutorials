@@ -11,6 +11,8 @@ find_package(catkin REQUIRED COMPONENTS
   actionlib
   actionlib_msgs
   interactive_markers
+  pcl_conversions
+  pcl_ros
   tf
   turtlesim
   urdf
@@ -116,7 +118,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES ros_beginner_tutorials
-  CATKIN_DEPENDS roscpp rospy std_msgs actionlib_msgs interactive_markers tf turtlesim urdf geometry_msgs sensor_msgs visualization_msgs message_runtime
+  CATKIN_DEPENDS roscpp rospy std_msgs actionlib_msgs interactive_markers pcl_conversions pcl_ros tf turtlesim urdf geometry_msgs sensor_msgs visualization_msgs message_runtime
 #  DEPENDS system_lib
 )
 
@@ -238,7 +240,10 @@ add_executable(state_publisher src/state_publisher.cpp)
 target_link_libraries(state_publisher ${catkin_LIBRARIES})
 
 add_executable(parser src/parser.cpp)
- target_link_libraries(parser ${catkin_LIBRARIES})
+target_link_libraries(parser ${catkin_LIBRARIES})
+
+add_executable(pcl_example src/pcl_example.cpp)
+target_link_libraries(pcl_example ${catkin_LIBRARIES})
 
 #############
 ## Install ##
@@ -300,6 +305,7 @@ install(TARGETS
   tf_broadcaster
   tf_listener
   parser
+  pcl_example
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
