@@ -1,7 +1,8 @@
 #include <ros/ros.h>
 #include <visualization_msgs/Marker.h>
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
     ros::init(argc, argv, "basic_shapes");
     ros::NodeHandle n;
     ros::Rate r(1);
@@ -10,7 +11,8 @@ int main(int argc, char** argv) {
     // Set our initial shape type to be a cube
     uint32_t shape = visualization_msgs::Marker::CUBE;
 
-    while (ros::ok()) {
+    while (ros::ok())
+    {
         visualization_msgs::Marker marker;
         // Set the frame ID and timestamp.  See the TF tutorials for information on these.
         marker.header.frame_id = "/my_frame";
@@ -50,8 +52,10 @@ int main(int argc, char** argv) {
         marker.lifetime = ros::Duration();
 
         // Publish the marker
-        while (marker_pub.getNumSubscribers() < 1) {
-            if (!ros::ok()) {
+        while (marker_pub.getNumSubscribers() < 1)
+        {
+            if (!ros::ok())
+            {
                 return 0;
             }
             ROS_WARN_ONCE("Please create a subscriber to the marker");
@@ -60,7 +64,8 @@ int main(int argc, char** argv) {
         marker_pub.publish(marker);
 
         // Cycle between different shapes
-        switch (shape) {
+        switch (shape)
+        {
             case visualization_msgs::Marker::CUBE:
                 shape = visualization_msgs::Marker::SPHERE;
                 break;

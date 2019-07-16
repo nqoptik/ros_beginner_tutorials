@@ -1,15 +1,16 @@
 #include <ros/ros.h>
 // PCL specific includes
-#include <sensor_msgs/PointCloud2.h>
-#include <pcl_conversions/pcl_conversions.h>
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
+#include <pcl_conversions/pcl_conversions.h>
+#include <sensor_msgs/PointCloud2.h>
 
 #include <pcl/filters/voxel_grid.h>
 
 ros::Publisher pub;
 
-void cloud_cb(const pcl::PCLPointCloud2ConstPtr& cloud) {
+void cloud_cb(const pcl::PCLPointCloud2ConstPtr& cloud)
+{
     pcl::PCLPointCloud2 cloud_filtered;
 
     // Perform the actual filtering
@@ -22,7 +23,8 @@ void cloud_cb(const pcl::PCLPointCloud2ConstPtr& cloud) {
     pub.publish(cloud_filtered);
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
     // Initialize ROS
     ros::init(argc, argv, "pcl_example");
     ros::NodeHandle nh;

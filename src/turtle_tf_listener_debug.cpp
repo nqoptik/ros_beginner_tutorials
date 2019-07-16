@@ -1,9 +1,10 @@
+#include <geometry_msgs/Twist.h>
 #include <ros/ros.h>
 #include <tf/transform_listener.h>
-#include <geometry_msgs/Twist.h>
 #include <turtlesim/Spawn.h>
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
     ros::init(argc, argv, "my_tf_listener");
 
     ros::NodeHandle node;
@@ -20,12 +21,16 @@ int main(int argc, char** argv) {
     tf::TransformListener listener;
 
     ros::Rate rate(10.0);
-    while (node.ok()) {
+    while (node.ok())
+    {
         tf::StampedTransform transform;
-        try {
+        try
+        {
             listener.lookupTransform("/turtle2", "/turtle1",
                                      ros::Time(0), transform);
-        } catch (tf::TransformException& ex) {
+        }
+        catch (tf::TransformException& ex)
+        {
             ROS_ERROR("%s", ex.what());
             ros::Duration(1.0).sleep();
             continue;

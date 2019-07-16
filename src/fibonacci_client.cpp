@@ -1,9 +1,10 @@
-#include <ros/ros.h>
 #include <actionlib/client/simple_action_client.h>
 #include <actionlib/client/terminal_state.h>
+#include <ros/ros.h>
 #include <ros_beginner_tutorials/FibonacciAction.h>
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
     ros::init(argc, argv, "test_fibonacci");
 
     // create the action client
@@ -12,7 +13,7 @@ int main(int argc, char** argv) {
 
     ROS_INFO("Waiting for action server to start.");
     // wait for the action server to start
-    ac.waitForServer();  //will wait for infinite time
+    ac.waitForServer(); //will wait for infinite time
 
     ROS_INFO("Action server started, sending goal.");
     // send a goal to the action
@@ -23,10 +24,12 @@ int main(int argc, char** argv) {
     //wait for the action to return
     bool finished_before_timeout = ac.waitForResult(ros::Duration(30.0));
 
-    if (finished_before_timeout) {
+    if (finished_before_timeout)
+    {
         actionlib::SimpleClientGoalState state = ac.getState();
         ROS_INFO("Action finished: %s", state.toString().c_str());
-    } else
+    }
+    else
         ROS_INFO("Action did not finish before the time out.");
 
     //exit

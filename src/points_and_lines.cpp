@@ -3,7 +3,8 @@
 
 #include <cmath>
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
     ros::init(argc, argv, "points_and_lines");
     ros::NodeHandle n;
     ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 10);
@@ -11,7 +12,8 @@ int main(int argc, char** argv) {
     ros::Rate r(30);
 
     float f = 0.0;
-    while (ros::ok()) {
+    while (ros::ok())
+    {
         visualization_msgs::Marker points, line_strip, line_list;
         points.header.frame_id = line_strip.header.frame_id = line_list.header.frame_id = "/my_frame";
         points.header.stamp = line_strip.header.stamp = line_list.header.stamp = ros::Time::now();
@@ -48,7 +50,8 @@ int main(int argc, char** argv) {
         line_list.color.a = 1.0;
 
         // Create the vertices for the points and lines
-        for (uint32_t i = 0; i < 100; ++i) {
+        for (uint32_t i = 0; i < 100; ++i)
+        {
             float y = 5 * sin(f + i / 100.0f * 2 * M_PI);
             float z = 5 * cos(f + i / 100.0f * 2 * M_PI);
 

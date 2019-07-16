@@ -1,13 +1,15 @@
-#include <ros/ros.h>
-#include <std_msgs/Float32.h>
 #include <actionlib/server/simple_action_server.h>
+#include <ros/ros.h>
 #include <ros_beginner_tutorials/AveragingAction.h>
+#include <std_msgs/Float32.h>
 
-class AveragingAction {
-   public:
+class AveragingAction
+{
+public:
     AveragingAction(std::string name)
         : as_(nh_, name, false),
-          action_name_(name) {
+          action_name_(name)
+    {
         //register the goal and feeback callbacks
         as_.registerGoalCallback(boost::bind(&AveragingAction::goalCB, this));
         as_.registerPreemptCallback(boost::bind(&AveragingAction::preemptCB, this));
@@ -17,10 +19,12 @@ class AveragingAction {
         as_.start();
     }
 
-    ~AveragingAction(void) {
+    ~AveragingAction(void)
+    {
     }
 
-    void goalCB() {
+    void goalCB()
+    {
         // reset helper variables
         data_count_ = 0;
         sum_ = 0;
@@ -29,13 +33,15 @@ class AveragingAction {
         goal_ = as_.acceptNewGoal()->samples;
     }
 
-    void preemptCB() {
+    void preemptCB()
+    {
         ROS_INFO("%s: Preempted", action_name_.c_str());
         // set the action state to preempted
         as_.setPreempted();
     }
 
-    void analysisCB(const std_msgs::Float32::ConstPtr& msg) {
+    void analysisCB(const std_msgs::Float32::ConstPtr& msg)
+    {
         // make sure that the action hasn't been canceled
         if (!as_.isActive())
             return;
@@ -50,15 +56,19 @@ class AveragingAction {
         feedback_.std_dev = sqrt(fabs((sum_sq_ / data_count_) - pow(feedback_.mean, 2)));
         as_.publishFeedback(feedback_);
 
-        if (data_count_ > goal_) {
+        if (data_count_ > goal_)
+        {
             result_.mean = feedback_.mean;
             result_.std_dev = feedback_.std_dev;
 
-            if (result_.mean < 5.0) {
+            if (result_.mean < 5.0)
+            {
                 ROS_INFO("%s: Aborted", action_name_.c_str());
                 //set the action state to aborted
                 as_.setAborted(result_);
-            } else {
+            }
+            else
+            {
                 ROS_INFO("%s: Succeeded", action_name_.c_str());
                 // set the action state to succeeded
                 as_.setSucceeded(result_);
@@ -66,7 +76,7 @@ class AveragingAction {
         }
     }
 
-   protected:
+protected:
     ros::NodeHandle nh_;
     actionlib::SimpleActionServer<ros_beginner_tutorials::AveragingAction> as_;
     std::string action_name_;
@@ -77,7 +87,8 @@ class AveragingAction {
     ros::Subscriber sub_;
 };
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
     ros::init(argc, argv, "averaging");
 
     AveragingAction averaging(ros::this_node::getName());

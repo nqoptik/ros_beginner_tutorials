@@ -1,14 +1,16 @@
-#include <ros/ros.h>
 #include <actionlib/client/simple_action_client.h>
 #include <actionlib/client/terminal_state.h>
-#include <ros_beginner_tutorials/AveragingAction.h>
 #include <boost/thread.hpp>
+#include <ros/ros.h>
+#include <ros_beginner_tutorials/AveragingAction.h>
 
-void spinThread() {
+void spinThread()
+{
     ros::spin();
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
     ros::init(argc, argv, "test_averaging");
 
     // create the action client
@@ -27,10 +29,12 @@ int main(int argc, char** argv) {
     //wait for the action to return
     bool finished_before_timeout = ac.waitForResult(ros::Duration(30.0));
 
-    if (finished_before_timeout) {
+    if (finished_before_timeout)
+    {
         actionlib::SimpleClientGoalState state = ac.getState();
         ROS_INFO("Action finished: %s", state.toString().c_str());
-    } else
+    }
+    else
         ROS_INFO("Action did not finish before the time out.");
 
     // shutdown the node and join the thread back before exiting

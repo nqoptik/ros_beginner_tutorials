@@ -1,9 +1,10 @@
-#include <string>
 #include <ros/ros.h>
 #include <sensor_msgs/JointState.h>
+#include <string>
 #include <tf/transform_broadcaster.h>
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
     ros::init(argc, argv, "state_publisher");
     ros::NodeHandle n;
     ros::Publisher joint_pub = n.advertise<sensor_msgs::JointState>("joint_states", 1);
@@ -21,7 +22,8 @@ int main(int argc, char** argv) {
     odom_trans.header.frame_id = "odom";
     odom_trans.child_frame_id = "axis";
 
-    while (ros::ok()) {
+    while (ros::ok())
+    {
         //update joint_state
         joint_state.header.stamp = ros::Time::now();
         joint_state.name.resize(3);

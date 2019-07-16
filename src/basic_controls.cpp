@@ -32,8 +32,8 @@
 #include <interactive_markers/interactive_marker_server.h>
 #include <interactive_markers/menu_handler.h>
 
-#include <tf/transform_broadcaster.h>
 #include <tf/tf.h>
+#include <tf/transform_broadcaster.h>
 
 #include <math.h>
 
@@ -45,7 +45,8 @@ interactive_markers::MenuHandler menu_handler;
 // %EndTag(vars)%
 
 // %Tag(Box)%
-Marker makeBox(InteractiveMarker& msg) {
+Marker makeBox(InteractiveMarker& msg)
+{
     Marker marker;
 
     marker.type = Marker::CUBE;
@@ -60,7 +61,8 @@ Marker makeBox(InteractiveMarker& msg) {
     return marker;
 }
 
-InteractiveMarkerControl& makeBoxControl(InteractiveMarker& msg) {
+InteractiveMarkerControl& makeBoxControl(InteractiveMarker& msg)
+{
     InteractiveMarkerControl control;
     control.always_visible = true;
     control.markers.push_back(makeBox(msg));
@@ -71,7 +73,8 @@ InteractiveMarkerControl& makeBoxControl(InteractiveMarker& msg) {
 // %EndTag(Box)%
 
 // %Tag(frameCallback)%
-void frameCallback(const ros::TimerEvent&) {
+void frameCallback(const ros::TimerEvent&)
+{
     static uint32_t counter = 0;
 
     static tf::TransformBroadcaster br;
@@ -93,20 +96,23 @@ void frameCallback(const ros::TimerEvent&) {
 // %EndTag(frameCallback)%
 
 // %Tag(processFeedback)%
-void processFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr& feedback) {
+void processFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr& feedback)
+{
     std::ostringstream s;
     s << "Feedback from marker '" << feedback->marker_name << "' "
       << " / control '" << feedback->control_name << "'";
 
     std::ostringstream mouse_point_ss;
-    if (feedback->mouse_point_valid) {
+    if (feedback->mouse_point_valid)
+    {
         mouse_point_ss << " at " << feedback->mouse_point.x
                        << ", " << feedback->mouse_point.y
                        << ", " << feedback->mouse_point.z
                        << " in frame " << feedback->header.frame_id;
     }
 
-    switch (feedback->event_type) {
+    switch (feedback->event_type)
+    {
         case visualization_msgs::InteractiveMarkerFeedback::BUTTON_CLICK:
             ROS_INFO_STREAM(s.str() << ": button click" << mouse_point_ss.str() << ".");
             break;
@@ -145,7 +151,8 @@ void processFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr
 // %EndTag(processFeedback)%
 
 // %Tag(alignMarker)%
-void alignMarker(const visualization_msgs::InteractiveMarkerFeedbackConstPtr& feedback) {
+void alignMarker(const visualization_msgs::InteractiveMarkerFeedbackConstPtr& feedback)
+{
     geometry_msgs::Pose pose = feedback->pose;
 
     pose.position.x = round(pose.position.x - 0.5) + 0.5;
@@ -166,12 +173,14 @@ void alignMarker(const visualization_msgs::InteractiveMarkerFeedbackConstPtr& fe
 }
 // %EndTag(alignMarker)%
 
-double rand(double min, double max) {
+double rand(double min, double max)
+{
     double t = (double)rand() / (double)RAND_MAX;
     return min + t * (max - min);
 }
 
-void saveMarker(InteractiveMarker int_marker) {
+void saveMarker(InteractiveMarker int_marker)
+{
     server->insert(int_marker);
     server->setCallback(int_marker.name, &processFeedback);
 }
@@ -179,7 +188,8 @@ void saveMarker(InteractiveMarker int_marker) {
 ////////////////////////////////////////////////////////////////////////////////////
 
 // %Tag(6DOF)%
-void make6DofMarker(bool fixed, unsigned int interaction_mode, const tf::Vector3& position, bool show_6dof) {
+void make6DofMarker(bool fixed, unsigned int interaction_mode, const tf::Vector3& position, bool show_6dof)
+{
     InteractiveMarker int_marker;
     int_marker.header.frame_id = "base_link";
     tf::pointTFToMsg(position, int_marker.pose.position);
@@ -194,13 +204,15 @@ void make6DofMarker(bool fixed, unsigned int interaction_mode, const tf::Vector3
 
     InteractiveMarkerControl control;
 
-    if (fixed) {
+    if (fixed)
+    {
         int_marker.name += "_fixed";
         int_marker.description += "\n(fixed orientation)";
         control.orientation_mode = InteractiveMarkerControl::FIXED;
     }
 
-    if (interaction_mode != visualization_msgs::InteractiveMarkerControl::NONE) {
+    if (interaction_mode != visualization_msgs::InteractiveMarkerControl::NONE)
+    {
         std::string mode_text;
         if (interaction_mode == visualization_msgs::InteractiveMarkerControl::MOVE_3D)
             mode_text = "MOVE_3D";
@@ -212,7 +224,8 @@ void make6DofMarker(bool fixed, unsigned int interaction_mode, const tf::Vector3
         int_marker.description = std::string("3D Control") + (show_6dof ? " + 6-DOF controls" : "") + "\n" + mode_text;
     }
 
-    if (show_6dof) {
+    if (show_6dof)
+    {
         control.orientation.w = 1;
         control.orientation.x = 1;
         control.orientation.y = 0;
@@ -255,7 +268,8 @@ void make6DofMarker(bool fixed, unsigned int interaction_mode, const tf::Vector3
 // %EndTag(6DOF)%
 
 // %Tag(RandomDof)%
-void makeRandomDofMarker(const tf::Vector3& position) {
+void makeRandomDofMarker(const tf::Vector3& position)
+{
     InteractiveMarker int_marker;
     int_marker.header.frame_id = "base_link";
     tf::pointTFToMsg(position, int_marker.pose.position);
@@ -268,7 +282,8 @@ void makeRandomDofMarker(const tf::Vector3& position) {
 
     InteractiveMarkerControl control;
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 3; i++)
+    {
         control.orientation.w = rand(-1, 1);
         control.orientation.x = rand(-1, 1);
         control.orientation.y = rand(-1, 1);
@@ -285,7 +300,8 @@ void makeRandomDofMarker(const tf::Vector3& position) {
 // %EndTag(RandomDof)%
 
 // %Tag(ViewFacing)%
-void makeViewFacingMarker(const tf::Vector3& position) {
+void makeViewFacingMarker(const tf::Vector3& position)
+{
     InteractiveMarker int_marker;
     int_marker.header.frame_id = "base_link";
     tf::pointTFToMsg(position, int_marker.pose.position);
@@ -322,7 +338,8 @@ void makeViewFacingMarker(const tf::Vector3& position) {
 // %EndTag(ViewFacing)%
 
 // %Tag(Quadrocopter)%
-void makeQuadrocopterMarker(const tf::Vector3& position) {
+void makeQuadrocopterMarker(const tf::Vector3& position)
+{
     InteractiveMarker int_marker;
     int_marker.header.frame_id = "base_link";
     tf::pointTFToMsg(position, int_marker.pose.position);
@@ -350,7 +367,8 @@ void makeQuadrocopterMarker(const tf::Vector3& position) {
 // %EndTag(Quadrocopter)%
 
 // %Tag(ChessPiece)%
-void makeChessPieceMarker(const tf::Vector3& position) {
+void makeChessPieceMarker(const tf::Vector3& position)
+{
     InteractiveMarker int_marker;
     int_marker.header.frame_id = "base_link";
     tf::pointTFToMsg(position, int_marker.pose.position);
@@ -383,7 +401,8 @@ void makeChessPieceMarker(const tf::Vector3& position) {
 // %EndTag(ChessPiece)%
 
 // %Tag(PanTilt)%
-void makePanTiltMarker(const tf::Vector3& position) {
+void makePanTiltMarker(const tf::Vector3& position)
+{
     InteractiveMarker int_marker;
     int_marker.header.frame_id = "base_link";
     tf::pointTFToMsg(position, int_marker.pose.position);
@@ -418,7 +437,8 @@ void makePanTiltMarker(const tf::Vector3& position) {
 // %EndTag(PanTilt)%
 
 // %Tag(Menu)%
-void makeMenuMarker(const tf::Vector3& position) {
+void makeMenuMarker(const tf::Vector3& position)
+{
     InteractiveMarker int_marker;
     int_marker.header.frame_id = "base_link";
     tf::pointTFToMsg(position, int_marker.pose.position);
@@ -444,7 +464,8 @@ void makeMenuMarker(const tf::Vector3& position) {
 // %EndTag(Menu)%
 
 // %Tag(Button)%
-void makeButtonMarker(const tf::Vector3& position) {
+void makeButtonMarker(const tf::Vector3& position)
+{
     InteractiveMarker int_marker;
     int_marker.header.frame_id = "base_link";
     tf::pointTFToMsg(position, int_marker.pose.position);
@@ -469,7 +490,8 @@ void makeButtonMarker(const tf::Vector3& position) {
 // %EndTag(Button)%
 
 // %Tag(Moving)%
-void makeMovingMarker(const tf::Vector3& position) {
+void makeMovingMarker(const tf::Vector3& position)
+{
     InteractiveMarker int_marker;
     int_marker.header.frame_id = "moving_frame";
     tf::pointTFToMsg(position, int_marker.pose.position);
@@ -498,7 +520,8 @@ void makeMovingMarker(const tf::Vector3& position) {
 // %EndTag(Moving)%
 
 // %Tag(main)%
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
     ros::init(argc, argv, "basic_controls");
     ros::NodeHandle n;
 
