@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.1)
 project(ros_beginner_tutorials)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 ## Compile with the highest warning level
