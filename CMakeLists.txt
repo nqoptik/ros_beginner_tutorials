@@ -1,8 +1,8 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.5)
 
 project(ros_beginner_tutorials)
 
-## Compile as C++11, supported in ROS Kinetic and newer
+## Compile as C++14, supported in ROS Kinetic and newer
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -12,22 +12,24 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED
-             COMPONENTS actionlib
-                        actionlib_msgs
-                        geometry_msgs
-                        interactive_markers
-                        message_generation
-                        pcl_conversions
-                        pcl_ros
-                        roscpp
-                        rospy
-                        sensor_msgs
-                        std_msgs
-                        tf
-                        turtlesim
-                        urdf
-                        visualization_msgs)
+# find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs)
+find_package(
+    catkin REQUIRED
+    COMPONENTS actionlib
+               actionlib_msgs
+               geometry_msgs
+               interactive_markers
+               message_generation
+               pcl_conversions
+               pcl_ros
+               roscpp
+               rospy
+               sensor_msgs
+               std_msgs
+               tf
+               turtlesim
+               urdf
+               visualization_msgs)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -62,19 +64,35 @@ find_package(catkin REQUIRED
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
+# add_message_files(
+#   FILES
+#   Message1.msg
+#   Message2.msg
+# )
 add_message_files(FILES Num.msg)
 
 ## Generate services in the 'srv' folder
+# add_service_files(
+#   FILES
+#   Service1.srv
+#   Service2.srv
+# )
 add_service_files(FILES AddTwoInts.srv)
 
 ## Generate actions in the 'action' folder
+# add_action_files(
+#   FILES
+#   Action1.action
+#   Action2.action
+# )
 add_action_files(FILES Fibonacci.action Averaging.action)
 
 ## Generate added messages and services with any dependencies listed here
-generate_messages(DEPENDENCIES
-                  actionlib_msgs
-                  geometry_msgs
-                  sensor_msgs
+# generate_messages(
+#   DEPENDENCIES
+#   std_msgs
+# )
+generate_messages(DEPENDENCIES actionlib_msgs geometry_msgs sensor_msgs
                   std_msgs)
 
 ################################################
@@ -106,21 +124,28 @@ generate_messages(DEPENDENCIES
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
-catkin_package(CATKIN_DEPENDS
-               actionlib_msgs
-               geometry_msgs
-               interactive_markers
-               message_runtime
-               pcl_conversions
-               pcl_ros
-               roscpp
-               rospy
-               sensor_msgs
-               std_msgs
-               tf
-               turtlesim
-               urdf
-               visualization_msgs)
+# catkin_package(
+#     #  INCLUDE_DIRS include
+#     #  LIBRARIES ros_beginner_tutorials
+#     #  CATKIN_DEPENDS roscpp rospy std_msgs
+#     #  DEPENDS system_lib
+# )
+catkin_package(
+    CATKIN_DEPENDS
+    actionlib_msgs
+    geometry_msgs
+    interactive_markers
+    message_runtime
+    pcl_conversions
+    pcl_ros
+    roscpp
+    rospy
+    sensor_msgs
+    std_msgs
+    tf
+    turtlesim
+    urdf
+    visualization_msgs)
 
 ###########
 ## Build ##
@@ -128,6 +153,8 @@ catkin_package(CATKIN_DEPENDS
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
+# include_directories(# include
+#                     ${catkin_INCLUDE_DIRS})
 include_directories(${catkin_INCLUDE_DIRS})
 
 ## Declare a C++ library
@@ -284,55 +311,66 @@ target_link_libraries(turtle_tf_message_filter ${catkin_LIBRARIES})
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
-# install(PROGRAMS
+# catkin_install_python(PROGRAMS
 #   scripts/my_python_script
 #   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 # )
-install(PROGRAMS scripts/add_two_ints_client.py
-                 scripts/add_two_ints_server.py
-                 scripts/dynamic_tf_broadcaster.py
-                 scripts/fibonacci_client.py
-                 scripts/fibonacci_server.py
-                 scripts/fixed_tf_broadcaster.py
-                 scripts/gen_numbers.py
-                 scripts/listener.py
-                 scripts/talker.py
-                 scripts/turtle_tf_broadcaster.py
-                 scripts/turtle_tf_listener.py
-                 scripts/turtle_tf_message_broadcaster.py
-        DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+catkin_install_python(
+    PROGRAMS
+    scripts/add_two_ints_client.py
+    scripts/add_two_ints_server.py
+    scripts/dynamic_tf_broadcaster.py
+    scripts/fibonacci_client.py
+    scripts/fibonacci_server.py
+    scripts/fixed_tf_broadcaster.py
+    scripts/gen_numbers.py
+    scripts/listener.py
+    scripts/talker.py
+    scripts/turtle_tf_broadcaster.py
+    scripts/turtle_tf_listener.py
+    scripts/turtle_tf_message_broadcaster.py
+    DESTINATION
+    ${CATKIN_PACKAGE_BIN_DESTINATION})
 
-## Mark executables and/or libraries for installation
-# install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_node
-#   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+## Mark executables for installation
+## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_executables.html
+# install(TARGETS ${PROJECT_NAME}_node
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 # )
-install(TARGETS add_two_ints_client
-                add_two_ints_server
-                averaging_client
-                averaging_server
-                basic_controls
-                basic_shapes
-                fibonacci_callback_client
-                fibonacci_class_client
-                fibonacci_client
-                fibonacci_server
-                frame_tf_broadcaster
-                listener
-                parser
-                pcl_example
-                points_and_lines
-                simple_marker
-                state_publisher
-                talker
-                tf_broadcaster
-                tf_listener
-                turtle_tf_broadcaster
-                turtle_tf_listener
-                turtle_tf_listener_debug
-                turtle_tf_message_filter
-        RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+install(
+    TARGETS add_two_ints_client
+            add_two_ints_server
+            averaging_client
+            averaging_server
+            basic_controls
+            basic_shapes
+            fibonacci_callback_client
+            fibonacci_class_client
+            fibonacci_client
+            fibonacci_server
+            frame_tf_broadcaster
+            listener
+            parser
+            pcl_example
+            points_and_lines
+            simple_marker
+            state_publisher
+            talker
+            tf_broadcaster
+            tf_listener
+            turtle_tf_broadcaster
+            turtle_tf_listener
+            turtle_tf_listener_debug
+            turtle_tf_message_filter
+    RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
+## Mark libraries for installation
+## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_libraries.html
+# install(TARGETS ${PROJECT_NAME}
+#   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+#   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+#   RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
+# )
 
 ## Mark cpp header files for installation
 # install(DIRECTORY include/${PROJECT_NAME}/
@@ -347,15 +385,16 @@ install(TARGETS add_two_ints_client
 #   # myfile2
 #   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 # )
-install(FILES launch/display.launch
-              launch/start_debug_demo.launch
-              launch/start_tf_demo.launch
-              launch/start_tf_demo_py.launch
-              launch/talk_and_listen.launch
-              launch/turtle_tf_sensor.launch
-              launch/turtlemimic.launch
-              launch/urdf_display.launch
-        DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+install(
+    FILES launch/display.launch
+          launch/start_debug_demo.launch
+          launch/start_tf_demo.launch
+          launch/start_tf_demo_py.launch
+          launch/talk_and_listen.launch
+          launch/turtle_tf_sensor.launch
+          launch/turtlemimic.launch
+          launch/urdf_display.launch
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 
 #############
 ## Testing ##
